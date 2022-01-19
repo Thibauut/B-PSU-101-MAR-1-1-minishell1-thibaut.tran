@@ -7,18 +7,48 @@
 
 #include "include/my.h"
 
-void print_arg(char **arg)
+void my_exec(char *ls, char **tab, char **env)
 {
+    int pid = fork();
+    int status;
+    if (pid == 0)
+        execve(ls, tab, env);
+    else
+        waitpid(pid, &status, 0);
+}
+
+int my_cmd(char **tab, char **env, char **av, my_struct *verif)
+{
+    verif->i = 0;
+    ls(tab, env, verif);
+    pwd(tab, verif);
+    cd(tab, verif);
+    clear(tab, env, verif);
+    my_exit(tab);
+    if (verif->i == 0 && tab[0][0] != '\n')
+        write(2, "invalid command\n", 16);
+    return (0);
+}
+
+int my_prompt(char **av, char **env)
+{
+    char *line = NULL;
     char **tab;
-    while (* arg) {
-        tab = word_to_tab(* arg);
-        arg ++;
+    int *d = 0;
+    size_t size = 2000; my_struct *verif = malloc(sizeof(my_struct));
+    write(0, "$> ", 3);
+    while (getline(&line, &size, stdin) > 0) {
+        tab = word_to_tab(line);
+        my_cmd(tab, env, av, verif);
+        write(0, "$> ", 3);
     }
-    my_show_word_array(tab);
-    return;
+    return (0);
 }
 
 int main(int ac, char **av, char **env)
 {
-    execve(av[1], av + 1, env);
+    if (ac > 1)
+        return (84);
+    my_prompt(av, env);
+    return (0);
 }
