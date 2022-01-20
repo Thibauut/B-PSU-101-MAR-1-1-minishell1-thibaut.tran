@@ -40,5 +40,7 @@ int ls(char **tab, char **env, my_struct *verif);
 int cd(char **tab, my_struct *verif);
 int clear(char **tab, char **env, my_struct *verif);
 int my_exit(char **tab);
+int my_env(char **tab, char **env, my_struct *verif);
+int my_setenv(char **tab, char **env, my_struct *verif);
 
 #endif

@@ -9,7 +9,8 @@ SRC	=	mysh.c	\
 		src/my_func_1.c	\
 		src/my_func_2.c	\
 		src/my_func_3.c	\
-		src/my_cmd.c	\
+		src/my_cmd_1.c	\
+		src/my_cmd_2.c
 
 OBJ	=	$(SRC:.c=.o)
 

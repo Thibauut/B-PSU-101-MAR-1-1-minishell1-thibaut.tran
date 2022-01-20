@@ -25,6 +25,8 @@ int my_cmd(char **tab, char **env, char **av, my_struct *verif)
     cd(tab, verif);
     clear(tab, env, verif);
     my_exit(tab);
+    my_env(tab, env, verif);
+    my_setenv(tab, env, verif);
     if (verif->i == 0 && tab[0][0] != '\n')
         write(2, "invalid command\n", 16);
     return (0);
@@ -36,11 +38,11 @@ int my_prompt(char **av, char **env)
     char **tab;
     int *d = 0;
     size_t size = 2000; my_struct *verif = malloc(sizeof(my_struct));
-    write(0, "$> ", 3);
+    write(0, ">$ ", 3);
     while (getline(&line, &size, stdin) > 0) {
         tab = word_to_tab(line);
         my_cmd(tab, env, av, verif);
-        write(0, "$> ", 3);
+        write(0, ">$ ", 3);
     }
     return (0);
 }
