@@ -16,7 +16,7 @@ int error_ls(char **tab)
     return (0);
 }
 
-int ls(char **tab, char **env, my_struct *verif)
+int ls(char **tab, char **env, my_struct_t *verif)
 {
     char *ls = "/bin/ls";
     if (my_strcmp(tab[0], "ls") == 0) {
@@ -39,7 +39,7 @@ int ls(char **tab, char **env, my_struct *verif)
     return (0);
 }
 
-int clear(char **tab, char **env, my_struct *verif)
+int clear(char **tab, char **env, my_struct_t *verif)
 {
     char *ls = "/bin/clear";
     if (my_strcmp(tab[0], "clear") == 0) {
@@ -51,7 +51,7 @@ int clear(char **tab, char **env, my_struct *verif)
     return (0);
 }
 
-int pwd(char **tab, my_struct *verif)
+int pwd(char **tab, my_struct_t *verif)
 {
     char *pwd = malloc(sizeof(char) * 4096);
     if (my_strcmp(tab[0], "pwd") == 0) {
@@ -65,7 +65,7 @@ int pwd(char **tab, my_struct *verif)
     return (0);
 }
 
-int cd(char **tab, my_struct *verif)
+int cd(char **tab, my_struct_t *verif)
 {
     if (my_strcmp(tab[0], "cd") == 0 && tab[1] != NULL) {
         if (tab[0][2] != '\0')

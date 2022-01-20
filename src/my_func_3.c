@@ -63,3 +63,11 @@ char *my_strcat(char *dest, char const *src)
     dest[a + i] = '\0';
     return (dest);
 }
+
+int tab_len(char **tab)
+{
+    int i = 0;
+    while (tab[i] != 0)
+        i += 1;
+    return (i);
+}

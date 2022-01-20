@@ -17,31 +17,33 @@ void my_exec(char *ls, char **tab, char **env)
         waitpid(pid, &status, 0);
 }
 
-int my_cmd(char **tab, char **env, char **av, my_struct *verif)
+int my_cmd(char **tab, my_env_t *my_env, char **av, my_struct_t *verif)
 {
     verif->i = 0;
-    ls(tab, env, verif);
+    verif->verif_env = 0;
+    ls(tab, my_env->env, verif);
     pwd(tab, verif);
     cd(tab, verif);
-    clear(tab, env, verif);
+    clear(tab, my_env->env, verif);
     my_exit(tab);
-    my_env(tab, env, verif);
-    my_setenv(tab, env, verif);
+    my_setenv(tab, my_env, verif);
+    my_unsetenv(tab, my_env, verif);
+    my_envp(tab, my_env, verif);
     if (verif->i == 0 && tab[0][0] != '\n')
         write(2, "invalid command\n", 16);
     return (0);
 }
 
-int my_prompt(char **av, char **env)
+int my_prompt(char **av, my_env_t *my_env)
 {
     char *line = NULL;
     char **tab;
     int *d = 0;
-    size_t size = 2000; my_struct *verif = malloc(sizeof(my_struct));
+    size_t size = 2000; my_struct_t *verif = malloc(sizeof(my_struct_t));
     write(0, ">$ ", 3);
     while (getline(&line, &size, stdin) > 0) {
         tab = word_to_tab(line);
-        my_cmd(tab, env, av, verif);
+        my_cmd(tab, my_env, av, verif);
         write(0, ">$ ", 3);
     }
     return (0);
@@ -49,8 +51,10 @@ int my_prompt(char **av, char **env)
 
 int main(int ac, char **av, char **env)
 {
+    my_env_t *my_env = malloc(sizeof(my_env_t));
+    my_env->env = env;
     if (ac > 1)
         return (84);
-    my_prompt(av, env);
+    my_prompt(av, my_env);
     return (0);
 }

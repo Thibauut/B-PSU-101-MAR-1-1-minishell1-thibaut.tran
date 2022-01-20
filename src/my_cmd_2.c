@@ -7,11 +7,16 @@
 
 #include "../include/my.h"
 
-int my_env(char **tab, char **env, my_struct *verif)
+int my_envp(char **tab, my_env_t *my_env, my_struct_t *verif)
 {
     if (my_strcmp(tab[0], "env") == 0) {
         verif->i = 1;
-        my_show_word_array(env);
+        if (tab[0][4] != '\0')
+            return (0);
+        if (my_env->tmp_env == 0)
+            my_show_word_array(my_env->env);
+        else
+            my_show_word_array(my_env->tmp_env);
     }
     return (0);
 }
@@ -22,16 +27,5 @@ int my_exit(char **tab)
         if (tab[0][5] != '\0')
             return (0);
         exit(0);
-    }
-}
-
-int my_setenv(char **tab, char **env, my_struct *verif)
-{
-    if (my_strcmp(tab[0], "setenv") == 0) {
-        if (tab[1] == NULL && tab[2] == NULL)
-            return (0);
-        if (tab[0][7] != '\0')
-            return (0);
-        verif->i = 1;
     }
 }
