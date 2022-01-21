@@ -26,6 +26,9 @@ int my_exit(char **tab)
     if (my_strcmp(tab[0], "exit") == 0) {
         if (tab[0][5] != '\0')
             return (0);
-        exit(0);
+        if (tab[1] != NULL)
+            exit(my_getnbr(tab[1]));
+        else
+            exit (0);
     }
 }
