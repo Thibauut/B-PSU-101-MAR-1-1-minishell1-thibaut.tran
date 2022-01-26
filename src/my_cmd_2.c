@@ -7,6 +7,18 @@
 
 #include "../include/my.h"
 
+int clear(char **tab, char **env, my_struct_t *verif)
+{
+    char *ls = "/bin/clear";
+    if (my_strcmp(tab[0], "clear") == 0) {
+        if (tab[0][6] != '\0')
+            return (0);
+        verif->i = 1;
+        my_exec(ls, tab, env);
+    }
+    return (0);
+}
+
 int my_envp(char **tab, my_env_t *my_env, my_struct_t *verif)
 {
     if (my_strcmp(tab[0], "env") == 0) {
@@ -31,4 +43,30 @@ int my_exit(char **tab)
         else
             exit (0);
     }
+    return (0);
 }
+
+int pwd(char **tab, my_struct_t *verif)
+{
+    char *pwd = malloc(sizeof(char) * 4096);
+    if (my_strcmp(tab[0], "pwd") == 0) {
+        if (tab[0][4] != '\0')
+            return (0);
+        verif->i = 1;
+        getcwd(pwd, 4096);
+        my_putstr(pwd);
+        my_putstr("\n");
+    }
+    return (0);
+}
+
+// int exec(char **tab, char **env, my_struct_t *verif)
+// {
+//     char *i = my_strdup(tab[0]);
+//     if (tab[0][0] == '.' && tab[0][1] == '/') {
+//         printf("tab[0] = %s", i);
+//         verif->i = 1;
+//         my_exec(i, tab, env);
+//     }
+//     return (0);
+// }

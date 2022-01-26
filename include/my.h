@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -18,6 +19,7 @@
 typedef struct verif_s {
     int i;
     int verif_env;
+    int verif_func;
 } my_struct_t;
 
 typedef struct env_s {
@@ -25,6 +27,7 @@ typedef struct env_s {
     char **tmp_env;
     char *str;
     char *stock;
+    int verif;
 } my_env_t;
 
 int tab_len(char **tab);
@@ -46,12 +49,22 @@ int my_cmd(char **tab, my_env_t *my_env, char **av, my_struct_t *verif);
 void my_exec(char *ls, char **tab, char **env);
 int pwd(char **tab, my_struct_t *verif);
 int ls(char **tab, char **env, my_struct_t *verif);
-int cd(char **tab, my_struct_t *verif);
+int cd(char **tab, my_struct_t *verif, char **env);
 int clear(char **tab, char **env, my_struct_t *verif);
 int my_exit(char **tab);
 int my_envp(char **tab, my_env_t *my_env, my_struct_t *verif);
-int my_setenv(char **tab, my_env_t *my_env, my_struct_t *verif);
+char **my_setenv(char **tab, my_env_t *my_env, my_struct_t *verif, char **env);
 char *charge_setenv(char **tab, int arg);
 int my_unsetenv(char **tab, my_env_t *my_env, my_struct_t *verif);
+char *clean_get_home(char *home);
+int exec(char **tab, char **env, my_struct_t *verif);
+char **set_setenv(char **tab, my_env_t *my_env, char **env);
+char *charge_setenv(char **tab, int arg);
+char **my_new_env(char **env, char *str, char **env2);
+char **my_new_env2(char **env, char *str);
+int pos_env(my_env_t *my_env, char **tab);
+char **exist_setenv(char **tab, my_env_t *my_env, char *str);
+char **no_exist_setenv(char **tab, my_env_t *my_env, char **env);
+char **set_setenv(char **tab, my_env_t *my_env, char **env);
 
 #endif

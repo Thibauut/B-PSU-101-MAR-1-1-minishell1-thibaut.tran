@@ -11,7 +11,8 @@ SRC	=	mysh.c	\
 		src/my_func_3.c	\
 		src/my_cmd_1.c	\
 		src/my_cmd_2.c	\
-		src/my_setenv.c	\
+		src/my_setenv_1.c	\
+		src/my_setenv_2.c	\
 		src/my_unsetenv.c
 
 OBJ	=	$(SRC:.c=.o)
