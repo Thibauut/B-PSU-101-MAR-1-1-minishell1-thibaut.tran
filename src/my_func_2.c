@@ -7,13 +7,6 @@
 
 #include "../include/my.h"
 
-int my_strlen(char *str)
-{
-    int i = 0;
-    for (; str[i]; i += 1);
-    return i;
-}
-
 char *my_strdup(char *str)
 {
     int i = 0;
@@ -46,6 +39,18 @@ char *my_itoa(int nb)
 }
 
 int my_strcmp(char *s1, char *s2)
+{
+    int len = my_strlen(s2);
+    if (len != my_strlen(s1))
+        return (1);
+    for (int j = 0; j != len; j += 1) {
+        if (s1[j] != s2[j])
+            return (1);
+    }
+    return (0);
+}
+
+int my_strcmp2(char *s1, char *s2)
 {
     int len = my_strlen(s2);
     for (int j = 0; j != len; j += 1) {

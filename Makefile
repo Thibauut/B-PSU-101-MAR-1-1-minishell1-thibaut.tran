@@ -9,10 +9,14 @@ SRC	=	mysh.c	\
 		src/my_func_1.c	\
 		src/my_func_2.c	\
 		src/my_func_3.c	\
-		src/my_cmd_1.c	\
-		src/my_cmd_2.c	\
+		src/my_cmd.c	\
 		src/my_setenv_1.c	\
 		src/my_setenv_2.c	\
+		src/my_get_path.c	\
+		src/my_exec.c	\
+		src/my_error.c	\
+		src/my_prompt.c	\
+		src/my_check_cmd.c	\
 		src/my_unsetenv.c
 
 OBJ	=	$(SRC:.c=.o)

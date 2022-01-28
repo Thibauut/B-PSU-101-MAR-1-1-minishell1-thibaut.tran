@@ -7,53 +7,49 @@
 
 #include "../include/my.h"
 
-char **check_spaces(char **tab)
+void skip_space(char *str, int *i)
+{
+    while (str[*i] == ' ') {
+        if (*i > 2 && str[*i - 1] != ' ')
+            return;
+        *i += 1;
+    }
+}
+
+int create_tab(char *str, char c)
 {
     int i = 0, j = 0;
-    while (tab[i] != NULL) {
-        if (tab[i][0] != 0 && tab[i][0] <= ' ')
-            tab[i][0] = '\0';
-        i += 1;
+    for (; str[i] != 0; i += 1) {
+        if (str[i] == c)
+            j += 1;
     }
-    return (tab);
+    return (j + 1);
 }
 
-char **not_alpha(char **tab, int *l, int *j, int *k)
+char **word_to_tab(char *str, char c, int i)
 {
-    if (*l == 0) {
-        *j += 1;
-        *k = 0;
-        tab[*j] = malloc(sizeof(char) * 4096);
-        *l += 1;
-    }
-    return (tab);
-}
-
-char **word_to_tab(char *str)
-{
-    int i = 0, j = 0, k = 0, l = 1;
-    char **tab = malloc(sizeof(char *) * 4096);
-    tab[0] = malloc(sizeof(char) * 4096);
-    if (str[0] == '\n') {
-        tab[0][0] = '\n';
-        return (tab);
-    }
+    int j = 0, k = 0, l = 1, size = create_tab(str, c);
+    char **tab = malloc(sizeof(char *) * (size + 1));
+    tab[0] = malloc(sizeof(char) * (my_strlen(str) + 1));
     while (str[i] != '\0') {
-        if (str[i] != ' ')
-            tab[j][k] = str[i], k += 1,l = 0;
-        else {
-            tab = not_alpha(tab, &l, &j, &k);
+        if (str[i] == c) {
+            i += 1;
+            tab[j][k] = '\0';
+            j += 1, k = 0;
+            tab[j] = malloc(sizeof(char) * (my_strlen(str) + 1));
+            skip_space(str, &i);
         }
-        i += 1;
+            tab[j][k] = str[i];
+        i += 1, k += 1;
     }
-    check_spaces(tab);
+    j += 1, tab[j] = NULL;
     return (tab);
 }
 
 char *my_strcat(char *dest, char const *src)
 {
-    char a = 0;
-    char i = 0;
+    int a = 0;
+    int i = 0;
     while (dest[a] != '\0')
         a = a + 1;
     while (src[i] != '\0') {
@@ -70,4 +66,11 @@ int tab_len(char **tab)
     while (tab[i] != 0)
         i += 1;
     return (i);
+}
+
+char *clean_line(char *line)
+{
+    char *tmp = my_strdup(line);
+    tmp[my_strlen(tmp) - 1] = '\0';
+    return (tmp);
 }

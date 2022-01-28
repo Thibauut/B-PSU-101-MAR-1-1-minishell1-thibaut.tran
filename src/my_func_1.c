@@ -7,6 +7,13 @@
 
 #include "../include/my.h"
 
+int my_strlen(char *str)
+{
+    int i = 0;
+    for (; str[i]; i += 1);
+    return i;
+}
+
 void my_putstr(char *str)
 {
     if (str == NULL)
@@ -18,18 +25,6 @@ void my_putstr(char *str)
 void my_putchar(char c)
 {
     write(1, &c, 1);
-}
-
-char *my_strncpy (char *dest, char *src, int n)
-{
-    int a = 0;
-    while (a != n) {
-        dest[a] = src[a];
-        a = a + 1;
-    }
-    if (n > a)
-        dest[a] = '\0';
-    return (dest);
 }
 
 int my_show_word_array(char **tab)
