@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
 #define m_len my_strlen
 #define m_cmp my_strcmp
 
@@ -58,18 +59,11 @@ void my_exec(char *path, char **tab, char **env);
 void my_putstr_error(char *str);
 int print_error(char *str, char *str2);
 int cd(my_env_t *m);
-// int pwd(char **tab, my_struct_t *verif);
-// int ls(char **tab, char **env, my_struct_t *verif);
-// int cd(char **tab, my_struct_t *verif, char **env);
-// int clear(char **tab, char **env, my_struct_t *verif);
+char *rm_extra_spaces(char *str);
+char *tab_to_space(char *str);
+int is_alpha(char *str);
 int my_exit(my_env_t *m);
-// int my_envp(char **tab, char **env, my_struct_t *verif);
 int my_setenv(my_env_t *m);
-void skip_space(char *str, int *i);
-// char *charge_setenv(char **tab, int arg);
-// char **my_unsetenv(char **tab, my_env_t *my_env, my_struct_t *verif);
-// char *clean_get_home(char *home);
-// int exec(char **tab, char **env, my_struct_t *verif);
 char **refresh_env(my_env_t *m, char *str);
 char **set_setenv(char **tab, my_env_t *my_env, char **env);
 char *charge_setenv(char **tab, int arg);

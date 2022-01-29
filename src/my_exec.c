@@ -21,9 +21,4 @@ void my_exec(char *path, char **tab, char **env)
         if (execve(path, tab, env) == -1);
         exit(EXIT_FAILURE);
     }
-    // if (WIFSIGNALED(status) == 0) {
-    //     if (WTERMSIG(status) == SIGSEGV) {
-    //         my_putstr_error("segfault\n");
-    //     }
-    // }
 }

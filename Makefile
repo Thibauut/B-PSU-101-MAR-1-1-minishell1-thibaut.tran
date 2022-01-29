@@ -17,6 +17,7 @@ SRC	=	mysh.c	\
 		src/my_error.c	\
 		src/my_prompt.c	\
 		src/my_check_cmd.c	\
+		src/my_tab_and_space.c	\
 		src/my_unsetenv.c
 
 OBJ	=	$(SRC:.c=.o)

@@ -12,9 +12,7 @@ int my_cmd(my_env_t *m, my_struct_t *verif)
     m_cmp(m->tab[0], "cd") == 0 ? cd(m) : 0;
     m_cmp(m->tab[0], "exit") == 0 ? my_exit(m) : 0;
     m_cmp(m->tab[0], "setenv") == 0 ? my_setenv(m) : 0;
-    // m_cmp(m->tab[0], "unsetenv") == 0 ? my_unsetenv(m) : 0;
-    // if (verif->i == 0 && m->tab[0][0] != '\n')
-    //     write(2, "invalid command\n", 16);
+    m_cmp(m->tab[0], "unsetenv") == 0 ? my_unsetenv(m) : 0;
     return (0);
 }
 

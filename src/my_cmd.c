@@ -48,6 +48,7 @@ int cd(my_env_t *m)
         chdir(str);
     else
         perror("access ");
+    return (0);
 }
 
 int my_exit(my_env_t *m)

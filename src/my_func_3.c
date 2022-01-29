@@ -7,13 +7,17 @@
 
 #include "../include/my.h"
 
-void skip_space(char *str, int *i)
+int is_alpha(char *str)
 {
-    while (str[*i] == ' ') {
-        if (*i > 2 && str[*i - 1] != ' ')
-            return;
-        *i += 1;
+    int i = 0;
+    while (str[i] != '\0') {
+        if ((str[i] >= 65 && str[i] <= 90) || (str[i] >= 97 && str[i] <= 122)
+        || (str[i] >= 48 && str[i] <= 57))
+            i += 1;
+        else
+            return (0);
     }
+    return (1);
 }
 
 int create_tab(char *str, char c)
@@ -31,13 +35,14 @@ char **word_to_tab(char *str, char c, int i)
     int j = 0, k = 0, l = 1, size = create_tab(str, c);
     char **tab = malloc(sizeof(char *) * (size + 1));
     tab[0] = malloc(sizeof(char) * (my_strlen(str) + 1));
+    str = tab_to_space(str);
+    str = rm_extra_spaces(str);
     while (str[i] != '\0') {
         if (str[i] == c) {
             i += 1;
             tab[j][k] = '\0';
             j += 1, k = 0;
             tab[j] = malloc(sizeof(char) * (my_strlen(str) + 1));
-            skip_space(str, &i);
         }
             tab[j][k] = str[i];
         i += 1, k += 1;
@@ -66,11 +71,4 @@ int tab_len(char **tab)
     while (tab[i] != 0)
         i += 1;
     return (i);
-}
-
-char *clean_line(char *line)
-{
-    char *tmp = my_strdup(line);
-    tmp[my_strlen(tmp) - 1] = '\0';
-    return (tmp);
 }

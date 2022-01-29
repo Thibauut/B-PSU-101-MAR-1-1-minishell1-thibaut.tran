@@ -9,15 +9,17 @@
 
 char **refresh_env(my_env_t *m, char *str)
 {
-    char **tmp = malloc(sizeof(char *) * (tab_len(m->env) + 20));
-    for (int i = 0, j = 0; m->env[i] != 0; i += 1) {
-        tmp[j] = malloc(sizeof(char) * (m_len(m->env[i]) + 1));
-        tmp[j] = my_strcpy(tmp[j], m->env[i]);
-        if (my_strcmp2(m->env[i], str) == 0)
-            printf("abc");
-        j += 1;
+    int i = 0, j = 0;
+    for (; m->env[i] != 0; i += 1);
+    for (; j != i; j += 1) {
+        if (my_strcmp2(m->env[j], str) == 0) {
+            for (; j != i; j += 1)
+                m->env[j] = m->env[j + 1];
+            m->env[j] = 0;
+            return (m->env);
+        }
     }
-    return (tmp);
+    return (m->env);
 }
 
 int if_unsetenv(my_env_t *m)
@@ -33,8 +35,10 @@ int if_unsetenv(my_env_t *m)
 
 int my_unsetenv(my_env_t *m)
 {
-    if (m->tab[1] == NULL)
-        print_error(m->tab[0], ": : Too few arguments.\n");
+    if (m->tab[1] == NULL) {
+        print_error(m->tab[0], ": Too few arguments.\n");
+        return (0);
+    }
     else
         if_unsetenv(m);
     return (0);

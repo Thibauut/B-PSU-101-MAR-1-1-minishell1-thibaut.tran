@@ -68,8 +68,14 @@ int my_setenv(my_env_t *m)
         print_error(m->tab[0], ": Variable name must begin with a letter.\n");
         return (0);
     }
-    if (m->tab[1] != NULL && m->tab[2] != NULL && m->tab[3])
+    if (is_alpha(m->tab[1]) == 0) {
+        print_error(m->tab[0], ": Variable name must contain alphanumeric characters.\n");
+        return (0);
+    }
+    if (m->tab[1] != NULL && m->tab[2] != NULL && m->tab[3]) {
         print_error(m->tab[0], ": Too many arguments.\n");
+        return (0);
+    }
     else
         if_setenv(m);
     return (0);
