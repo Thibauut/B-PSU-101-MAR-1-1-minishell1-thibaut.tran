@@ -17,7 +17,7 @@ char *clean_line(char *line)
 char *tab_to_space(char *str)
 {
     int i = 0, j = 0;
-    char *cpy = malloc(sizeof(char) * my_strlen(str));
+    char *cpy = malloc(sizeof(char) * my_strlen(str) + 1);
     for (; str[i] != '\0'; i += 1) {
         if (str[i] == '\t')
             cpy[i] = ' ';
@@ -31,7 +31,7 @@ char *tab_to_space(char *str)
 char *rm_extra_spaces(char *str)
 {
     int i = 0, j = 0;
-    char *cpy = malloc(sizeof(char) * my_strlen(str));
+    char *cpy = malloc(sizeof(char) * my_strlen(str) + 1);
     for (; str[i] == ' '; i += 1);
     for (; str[i] != '\0'; i += 1) {
         if (str[i] == ' ' && str[i - 1] == ' ')

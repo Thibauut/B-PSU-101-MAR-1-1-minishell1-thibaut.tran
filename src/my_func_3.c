@@ -27,6 +27,8 @@ int create_tab(char *str, char c)
         if (str[i] == c)
             j += 1;
     }
+    if (j = 0)
+        return (84);
     return (j + 1);
 }
 
