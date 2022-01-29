@@ -63,3 +63,14 @@ int my_exit(my_env_t *m)
     }
     return (0);
 }
+
+int my_env(my_env_t *m)
+{
+    if (m->env == NULL) {
+        my_putstr_error("Env is empty.\n");
+        return (0);
+    }
+    for (int i = 0; m->env[i] != 0; i += 1)
+        my_putstr(m->env[i]), my_putchar('\n');
+    return (0);
+}

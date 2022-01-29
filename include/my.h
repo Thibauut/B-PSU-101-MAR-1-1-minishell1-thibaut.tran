@@ -76,5 +76,6 @@ int if_setenv_exist(my_env_t *m);
 int pos_env(my_env_t *m, char *str);
 int if_unsetenv(my_env_t *m);
 int my_unsetenv(my_env_t *m);
+int my_env(my_env_t *m);
 
 #endif
