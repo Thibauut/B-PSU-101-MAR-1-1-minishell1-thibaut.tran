@@ -64,13 +64,18 @@ int my_exit(my_env_t *m)
     return (0);
 }
 
-int my_env(my_env_t *m)
+int exec(my_env_t *m)
 {
-    if (m->env == NULL) {
-        my_putstr_error("Env is empty.\n");
-        return (0);
+    int j = 0;
+    char *stock = m->tab[0];
+    for (int i = 2; m->tab[0][i] != '\0'; i += 1) {
+        m->tab[0][j] = m->tab[0][i];
+        j += 1;
     }
-    for (int i = 0; m->env[i] != 0; i += 1)
-        my_putstr(m->env[i]), my_putchar('\n');
+    m->tab[0][j] = '\0';
+    if (access(m->tab[0], X_OK) == 0)
+        my_exec(stock, m->tab, m->env);
+    else
+        perror("access ");
     return (0);
 }

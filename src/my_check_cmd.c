@@ -14,6 +14,7 @@ int my_cmd(my_env_t *m, my_struct_t *verif)
     m_cmp(m->tab[0], "setenv") == 0 ? my_setenv(m) : 0;
     m_cmp(m->tab[0], "unsetenv") == 0 ? my_unsetenv(m) : 0;
     m_cmp(m->tab[0], "env") == 0 ? my_env(m) : 0;
+    my_strcmp2(m->tab[0], "./") == 0 ? exec(m) : 0;
     return (0);
 }
 
@@ -21,7 +22,7 @@ int check_cmd(my_env_t *m, my_struct_t *verif)
 {
     if (m_cmp(m->tab[0], "exit") == 0 || m_cmp(m->tab[0], "setenv") == 0
     || m_cmp(m->tab[0], "unsetenv") == 0 || m_cmp(m->tab[0], "cd") == 0
-    || m_cmp(m->tab[0], "env") == 0)
+    || m_cmp(m->tab[0], "env") == 0 || my_strcmp2(m->tab[0], "./") == 0)
         my_cmd(m, verif);
     else {
         if (path_cmd(m) == 0)
