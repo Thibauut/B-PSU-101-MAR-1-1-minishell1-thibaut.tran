@@ -6,6 +6,9 @@
 */
 
 #include "../include/my.h"
+#define error1 ": Variable name must begin with a letter.\n"
+#define error2 ": Variable name must contain alphanumeric characters.\n"
+#define error3 ": Too many arguments.\n"
 
 int pos_env(my_env_t *m, char *str)
 {
@@ -57,24 +60,22 @@ int if_setenv(my_env_t *m)
     return (0);
 }
 
-int my_setenv(my_env_t *m)
+int my_setenv(my_env_t *m, int *ret)
 {
-    if (m->tab[1] == NULL && m->tab[2] == NULL) {
-        my_show_word_array(m->env);
-        return (0);
-    }
+    if (m->tab[1] == NULL && m->tab[2] == NULL)
+        return (my_show_word_array(m->env));
     if ((m->tab[1][0] < 'A' || m->tab[1][0] > 'Z') && (m->tab[1][0] < 'a'
     || m->tab[1][0] > 'z')) {
-        print_error(m->tab[0], ": Variable name must begin with a letter.\n");
-        return (0);
+        *ret = 1;
+        return (print_error(m->tab[0], error1));
     }
     if (is_alpha(m->tab[1]) == 0) {
-        print_error(m->tab[0], ": Variable name must contain alphanumeric characters.\n");
-        return (0);
+        *ret = 1;
+        return (print_error(m->tab[0], error2));
     }
     if (m->tab[1] != NULL && m->tab[2] != NULL && m->tab[3]) {
-        print_error(m->tab[0], ": Too many arguments.\n");
-        return (0);
+        *ret = 1;
+        return (print_error(m->tab[0], error3));
     }
     else
         if_setenv(m);

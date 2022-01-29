@@ -33,11 +33,11 @@ int if_unsetenv(my_env_t *m)
     return (0);
 }
 
-int my_unsetenv(my_env_t *m)
+int my_unsetenv(my_env_t *m, int *ret)
 {
     if (m->tab[1] == NULL) {
-        print_error(m->tab[0], ": Too few arguments.\n");
-        return (0);
+        *ret = 1;
+        return (print_error(m->tab[0], ": Too few arguments.\n"));
     }
     else
         if_unsetenv(m);

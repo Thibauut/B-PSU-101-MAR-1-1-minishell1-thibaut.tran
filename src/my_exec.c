@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void my_exec(char *path, char **tab, char **env)
+void my_exec(char *path, char **tab, char **env, int *ret)
 {
     pid_t pid = fork();
     int status = 0;

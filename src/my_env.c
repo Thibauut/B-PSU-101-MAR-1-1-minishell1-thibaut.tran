@@ -7,11 +7,12 @@
 
 #include "../include/my.h"
 
-int my_env(my_env_t *m)
+int my_env(my_env_t *m, int *ret)
 {
     if (m->env == NULL) {
+        *ret = 1;
         my_putstr_error("Env is empty.\n");
-        return (0);
+        return (84);
     }
     for (int i = 0; m->env[i] != 0; i += 1)
         my_putstr(m->env[i]), my_putchar('\n');

@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-int path_cmd(my_env_t *m)
+int path_cmd(my_env_t *m, int *ret)
 {
     char **tmp = malloc(sizeof(char *) * (tab_len(m->path) + 20));
     for (int i = 0; m->path[i] != 0; i += 1) {
@@ -16,7 +16,7 @@ int path_cmd(my_env_t *m)
         tmp[i] = my_strcpy(tmp[i], m->path[i]), tmp[i] = my_strcat(tmp[i], "/");
         tmp[i] = my_strcat(tmp[i], m->tab[0]);
         if (access(tmp[i], X_OK) == 0 && access(tmp[i], F_OK) == 0) {
-            my_exec(tmp[i], m->tab, m->env);
+            my_exec(tmp[i], m->tab, m->env, ret);
             return (1);
         }
     }

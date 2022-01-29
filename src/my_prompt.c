@@ -22,13 +22,13 @@ int print_prompt(void)
 void handle(int signal)
 {
     if (signal == SIGSEGV || signal == SIGBUS) {
-        my_putstr_error("Segmentation fault\n");
+        my_putstr_error("Segmentation fault.\n");
         exit(139);
     }
     return;
 }
 
-int my_prompt(my_env_t *m, my_struct_t *verif)
+int my_prompt(my_env_t *m, my_struct_t *verif, int *ret)
 {
     verif->i = 0;
     size_t size = 2000;
@@ -39,12 +39,9 @@ int my_prompt(my_env_t *m, my_struct_t *verif)
         line = clean_line(line);
         m->tab = word_to_tab(line, ' ', 0);
         m->path = get_path(m->env);
-        check_cmd(m, verif);
+        check_cmd(m, verif, ret);
         print_prompt();
     }
-    if (getline(&line, &size, stdin) == -1) {
-        write(0, "exit\n", 5);
-        exit(EXIT_SUCCESS);
-    }
+    write(0, "exit\n", 5);
     return (0);
 }

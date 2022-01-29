@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <errno.h>
 #define m_len my_strlen
 #define m_cmp my_strcmp
 
@@ -34,7 +35,7 @@ typedef struct env_s {
     int verif;
 } my_env_t;
 
-int my_prompt(my_env_t *m, my_struct_t *verif);
+int my_prompt(my_env_t *m, my_struct_t *verif, int *ret);
 int tab_len(char **tab);
 char *my_strdup(char *str);
 void my_putchar(char c);
@@ -50,20 +51,20 @@ char **word_to_tab(char *str, char c, int i);
 char *my_strcpy(char *dest, char const *src);
 char **check_spaces(char **tab, char limit);
 char *my_strcat(char *dest, char const *src);
-int my_cmd(my_env_t *m, my_struct_t *verif);
-int check_cmd(my_env_t *m, my_struct_t *verif);
-int path_cmd(my_env_t *my);
+int my_cmd(my_env_t *m, my_struct_t *verif, int *ret);
+int check_cmd(my_env_t *m, my_struct_t *verif, int *ret);
+int path_cmd(my_env_t *m, int *ret);
 char **get_path(char **env);
 char *clean_line(char *line);
-void my_exec(char *path, char **tab, char **env);
+void my_exec(char *path, char **tab, char **env, int *ret);
 void my_putstr_error(char *str);
 int print_error(char *str, char *str2);
-int cd(my_env_t *m);
+int cd(my_env_t *m, int *ret);
 char *rm_extra_spaces(char *str);
 char *tab_to_space(char *str);
 int is_alpha(char *str);
 int my_exit(my_env_t *m);
-int my_setenv(my_env_t *m);
+int my_setenv(my_env_t *m, int *ret);
 char **refresh_env(my_env_t *m, char *str);
 char **set_setenv(char **tab, my_env_t *my_env, char **env);
 char *charge_setenv(char **tab, int arg);
@@ -75,8 +76,8 @@ int no_exist_setenv(my_env_t *m, char *str);
 int if_setenv_exist(my_env_t *m);
 int pos_env(my_env_t *m, char *str);
 int if_unsetenv(my_env_t *m);
-int my_unsetenv(my_env_t *m);
-int my_env(my_env_t *m);
-int exec(my_env_t *m);
+int my_unsetenv(my_env_t *m, int *ret);
+int my_env(my_env_t *m, int *ret);
+int exec(my_env_t *m, int *ret);
 
 #endif

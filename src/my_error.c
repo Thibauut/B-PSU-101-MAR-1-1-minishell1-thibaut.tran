@@ -24,5 +24,5 @@ int print_error(char *str, char *str2)
 {
     my_putstr_error(str);
     my_putstr_error(str2);
-    return (0);
+    return (84);
 }

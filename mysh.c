@@ -9,11 +9,12 @@
 
 int main(int ac, char **av, char **env)
 {
+    int ret = 0;
     my_env_t *my_env = malloc(sizeof(my_env_t));
     my_struct_t *verif = malloc(sizeof(my_struct_t));
     my_env->env = env;
     if (ac > 1)
         return (84);
-    my_prompt(my_env, verif);
-    return (0);
+    my_prompt(my_env, verif, &ret);
+    return (ret);
 }
