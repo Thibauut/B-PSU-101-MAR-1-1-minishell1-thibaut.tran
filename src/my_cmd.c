@@ -35,6 +35,18 @@ char *cd_get(char **env, char *arg)
     return (home);
 }
 
+char *cd_checker(my_env_t *m)
+{
+    char *str;
+    if (m->tab[0] != NULL && m->tab[1] == NULL)
+        str = cd_get(m->env, "HOME=");
+    else if (m->tab[0] != NULL && m->tab[1][0] == '-')
+        str = cd_get(m->env, "OLDPWD=");
+    else
+        str = my_strdup(m->tab[1]);
+    return (str);
+}
+
 int cd(my_env_t *m, int *ret)
 {
     char *str;
@@ -42,12 +54,11 @@ int cd(my_env_t *m, int *ret)
         *ret = 1;
         return (print_error(m->tab[0], ": Too many arguments.\n"));
     }
-    if (m->tab[0] != NULL && m->tab[1] == NULL)
-        str = cd_get(m->env, "HOME=");
-    else if (m->tab[0] != NULL && m->tab[1][0] == '-')
-        str = cd_get(m->env, "OLDPWD=");
-    else
-        str = my_strdup(m->tab[1]);
+    str = cd_checker(m);
+    if (access(str, R_OK) == -1) {
+        *ret = 1;
+        return (print_error(m->tab[0], ": Permission denied.\n"));
+    }
     if (access(str, F_OK) == 0)
         chdir(str);
     else {
