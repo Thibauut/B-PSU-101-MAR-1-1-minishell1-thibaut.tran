@@ -9,6 +9,7 @@
 
 int path_cmd(my_env_t *m, int *ret)
 {
+
     char **tmp = malloc(sizeof(char *) * (tab_len(m->path) + 20));
     for (int i = 0; m->path[i] != 0; i += 1) {
         tmp[i] = malloc(sizeof(char) * (m_len(m->path[i]) +
@@ -26,13 +27,10 @@ int path_cmd(my_env_t *m, int *ret)
 char **get_path(char **env)
 {
     char **path;
-	char *tmp = my_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
     for (int i = 0; env[i] != 0; i += 1) {
         if (env[i][0] ==  'P' && env[i][1] ==  'A' && env[i][2] ==  'T' ||
         env[i][3] ==  'H' && env[i][4] ==  '=')
             path = word_to_tab(env[i], ':', 5);
-        else
-            path = word_to_tab(tmp, ':', 0);
     }
     return (path);
 }

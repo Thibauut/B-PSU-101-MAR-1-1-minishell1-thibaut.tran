@@ -27,8 +27,6 @@ int create_tab(char *str, char c)
         if (str[i] == c)
             j += 1;
     }
-    if (j = 0)
-        return (84);
     return (j + 1);
 }
 
@@ -46,10 +44,10 @@ char **word_to_tab(char *str, char c, int i)
             j += 1, k = 0;
             tab[j] = malloc(sizeof(char) * (my_strlen(str) + 1));
         }
-            tab[j][k] = str[i];
+        tab[j][k] = str[i];
         i += 1, k += 1;
     }
-    j += 1, tab[j] = NULL;
+    j += 1, tab[j] = 0;
     return (tab);
 }
 
