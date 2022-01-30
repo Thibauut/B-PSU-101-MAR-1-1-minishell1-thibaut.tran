@@ -26,11 +26,14 @@ typedef struct verif_s {
 } my_struct_t;
 
 typedef struct env_s {
+    char *refresh_pwd;
+    char **tab_pwd;
     char **tab;
     char **path;
     char **env;
     char **tmp_env;
     char *str;
+    char *str2;
     char *stock;
     int verif;
 } my_env_t;
@@ -74,10 +77,17 @@ int pos_env(my_env_t *m, char *str);
 int exist_setenv(my_env_t *m, char *str);
 int no_exist_setenv(my_env_t *m, char *str);
 int if_setenv_exist(my_env_t *m);
+int if_setenv(my_env_t *m);
 int pos_env(my_env_t *m, char *str);
 int if_unsetenv(my_env_t *m);
 int my_unsetenv(my_env_t *m, int *ret);
 int my_env(my_env_t *m, int *ret);
 int exec(my_env_t *m, int *ret);
+int my_env_exist_for_cd(my_env_t *m);
+int exist_setenv_for_cd(my_env_t *m, char *str);
+int if_setenv_for_cd(my_env_t *m);
+int my_setenv_for_cd(my_env_t *m, int *ret);
+char *clean_get_home(char *home);
+int pwd_tab(my_env_t *m);
 
 #endif

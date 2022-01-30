@@ -7,21 +7,6 @@
 
 #include "../include/my.h"
 
-char *clean_get_home(char *home)
-{
-    char *tmp = malloc(sizeof(char) * my_strlen(home) + 1);
-    int j = 0, i = 0, verif = 0;
-    for (; home[i] != '\0'; i += 1) {
-        if (home[i] == '/')
-            verif = 1;
-        if (verif == 1) {
-            tmp[j] = home[i];
-            j += 1;
-        }
-    }
-    return (tmp);
-}
-
 char *cd_get(char **env, char *arg)
 {
     char *home;
@@ -55,12 +40,16 @@ int cd(my_env_t *m, int *ret)
         return (print_error(m->tab[0], ": Too many arguments.\n"));
     }
     str = cd_checker(m);
-    if (access(str, F_OK) == 0)
+    if (access(str, F_OK) == 0) {
         chdir(str);
+        m->refresh_pwd = getcwd(m->refresh_pwd, 4096);
+    }
     else {
         *ret = 1;
         return (print_error(m->tab[0], ": No such file or directory.\n"));
     }
+    pwd_tab(m);
+    if_setenv_for_cd(m);
     return (0);
 }
 
