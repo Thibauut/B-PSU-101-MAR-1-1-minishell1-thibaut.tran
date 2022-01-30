@@ -55,10 +55,6 @@ int cd(my_env_t *m, int *ret)
         return (print_error(m->tab[0], ": Too many arguments.\n"));
     }
     str = cd_checker(m);
-    if (access(str, R_OK) == -1) {
-        *ret = 1;
-        return (print_error(m->tab[0], ": Permission denied.\n"));
-    }
     if (access(str, F_OK) == 0)
         chdir(str);
     else {

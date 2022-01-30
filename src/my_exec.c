@@ -16,7 +16,7 @@ void my_exec(char *path, char **tab, char **env, int *ret)
     else if (pid > 0) {
         waitpid(pid, &status, 0);
         kill(pid, SIGTERM);
-        if (status != 0)
+        if (status != 0 && 256)
             *ret = 2;
     }
     else {

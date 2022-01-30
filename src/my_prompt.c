@@ -21,7 +21,7 @@ int print_prompt(void)
 
 void handle(int signal)
 {
-    if (signal == SIGSEGV || signal == SIGBUS) {
+    if (signal == SIGSEGV) {
         my_putstr_error("Segmentation fault.\n");
         exit(139);
     }
