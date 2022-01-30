@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-PSU-101-MAR-1-1-minishell1-thibaut.tran
 ** File description:
-** my_func_4.c
+** my_prompt.c
 */
 
 #include "../include/my.h"
@@ -32,7 +32,8 @@ int my_prompt(my_env_t *m, my_struct_t *verif, int *ret)
 {
     verif->i = 0;
     size_t size = 2000;
-    char *line = NULL; int i;
+    char *line = NULL;
+    int i;
     print_prompt();
     signal(SIGSEGV, handle);
     while (getline(&line, &size, stdin) > 0) {

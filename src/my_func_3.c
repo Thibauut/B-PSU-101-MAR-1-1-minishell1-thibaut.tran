@@ -32,7 +32,7 @@ int create_tab(char *str, char c)
 
 char **word_to_tab(char *str, char c, int i)
 {
-    int j = 0, k = 0, l = 1, size = create_tab(str, c);
+    int j = 0, k = 0, size = create_tab(str, c);
     char **tab = malloc(sizeof(char *) * (size + 1));
     tab[0] = malloc(sizeof(char) * (my_strlen(str) + 1));
     str = tab_to_space(str);

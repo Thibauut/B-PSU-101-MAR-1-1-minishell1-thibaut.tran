@@ -14,7 +14,13 @@ int my_env(my_env_t *m, int *ret)
         my_putstr_error("Env is empty.\n");
         return (0);
     }
-    for (int i = 0; m->env[i] != 0; i += 1)
-        my_putstr(m->env[i]), my_putchar('\n');
+    if (m->tab[1] != NULL) {
+        *ret = 1;
+        return (print_error(m->tab[0], ": Too many arguments.\n"));
+    }
+    else {
+        for (int i = 0; m->env[i] != 0; i += 1)
+            my_putstr(m->env[i]), my_putchar('\n');
+    }
     return (0);
 }

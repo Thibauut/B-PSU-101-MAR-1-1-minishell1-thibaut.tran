@@ -15,6 +15,7 @@
 #include <errno.h>
 #define m_len my_strlen
 #define m_cmp my_strcmp
+#define m_cpy my_strcpy
 
 #ifndef MY_H_
 #define MY_H_

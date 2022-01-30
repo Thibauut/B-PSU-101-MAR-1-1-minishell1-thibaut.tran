@@ -66,4 +66,3 @@ int pwd_tab(my_env_t *m)
     m->tab_pwd[3] = 0;
     return (0);
 }
-

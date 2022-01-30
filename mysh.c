@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-PSU-101-MAR-1-1-minishell1-thibaut.tran
 ** File description:
-** minishell1.c
+** mysh.c
 */
 
 #include "include/my.h"
