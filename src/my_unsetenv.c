@@ -13,8 +13,7 @@ char **refresh_env(my_env_t *m, char *str)
     for (; m->env[i] != 0; i += 1);
     for (; j != i; j += 1) {
         if (my_strcmp2(m->env[j], str) == 0) {
-            for (; j != i; j += 1)
-                m->env[j] = m->env[j + 1];
+            for (; j != i; j += 1) m->env[j] = m->env[j + 1];
             m->env[j] = 0;
             return (m->env);
         }
