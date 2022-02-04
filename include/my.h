@@ -13,6 +13,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <errno.h>
+#include <dirent.h>
+#include <sys/stat.h>
 #define m_len my_strlen
 #define m_cmp my_strcmp
 #define m_cpy my_strcpy
@@ -28,6 +30,7 @@ typedef struct verif_s {
 
 typedef struct env_s {
     char *refresh_pwd;
+    char *old_pwd;
     char **tab_pwd;
     char **tab;
     char **path;
@@ -90,5 +93,6 @@ int if_setenv_for_cd(my_env_t *m);
 int my_setenv_for_cd(my_env_t *m, int *ret);
 char *clean_get_home(char *home);
 int pwd_tab(my_env_t *m);
+char *my_get_line(char **env, char *arg);
 
 #endif
