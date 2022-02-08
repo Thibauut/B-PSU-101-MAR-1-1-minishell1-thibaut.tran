@@ -19,15 +19,6 @@ int print_prompt(void)
     return (0);
 }
 
-void handle(int signal)
-{
-    if (signal == SIGSEGV) {
-        my_putstr_error("Segmentation fault.\n");
-        exit(139);
-    }
-    return;
-}
-
 int my_prompt(my_env_t *m, my_struct_t *verif, int *ret)
 {
     verif->i = 0;
@@ -35,7 +26,6 @@ int my_prompt(my_env_t *m, my_struct_t *verif, int *ret)
     char *line = NULL;
     int i;
     print_prompt();
-    signal(SIGSEGV, handle);
     while (getline(&line, &size, stdin) > 0) {
         line = clean_line(line);
         m->tab = word_to_tab(line, ' ', 0);

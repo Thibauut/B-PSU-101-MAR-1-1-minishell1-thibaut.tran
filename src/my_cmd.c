@@ -85,21 +85,3 @@ int my_exit(my_env_t *m)
     }
     return (0);
 }
-
-int exec(my_env_t *m, int *ret)
-{
-    int j = 0;
-    char *stock = my_strdup(m->tab[0]);
-    for (int i = 2; m->tab[0][i] != '\0'; i += 1) {
-        m->tab[0][j] = m->tab[0][i];
-        j += 1;
-    }
-    m->tab[0][j] = '\0';
-    if (access(m->tab[0], X_OK) == 0)
-        my_exec(stock, m->tab, m->env, ret);
-    else {
-        *ret = 1;
-        print_error(stock, ": No such file or directory\n");
-    }
-    return (0);
-}
